@@ -1,0 +1,1 @@
+README for the Node.js/MongoDB BlogService project
