@@ -27,11 +27,15 @@ app.get('/', function(req, res) {
   res.render('pages/index');
 });
 
+app.get('/blog', function(req, res) {
+  res.render('pages/blog');
+});
+
 app.get('/blog/:username/:postid', function(req, res) {
   res.render('pages/blog');
 });
 
-app.get('/blog/:username', function(req, res)) {
+app.get('/blog/:username', function(req, res) {
   res.render('pages/blog');
 });
 
@@ -60,5 +64,7 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 */
-app.listen(3000);
+//app.listen(3000);
 console.log('3000 babbbbyyyy');
+
+module.exports = app;
