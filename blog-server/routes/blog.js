@@ -12,53 +12,27 @@ router.get('/:username/:postid', function(req, res, next) {
 
   var user = req.params.username;
   var pid = parseInt(req.params.postid);
-  var title;
-  var body;
-  var created;
-  var modified;
 
-  //connect to the MongoDB database
-
-  MongoClient.connect('mongodb://localhost:27017', (err, client) => {
-    if (err) { console.dir(err); }
-
-    var db = client.db('BlogServer');
-
-    var posts = db.collection('Posts').findOne({
+  var mydb = req.app.get('db');
+  var blogdb = mydb.db('BlogServer');
+  
+  blogdb.collection('Posts').findOne({
       postid: pid,
       username: user
-    },function(findErr, result) {
-      if (findErr) throw findErr;
-      //console.log(result);
-      title = result.title;
-      body = result.body;
-      created = result.created;
-      modified = result.modified;
-      client.close();
-
-      console.log(title);
-
-      res.render('pages/blog', {
-        username: user,
-        postid: pid,
-        title: title,
-        body: body,
-        created: created,
-        modified: modified
-       });
-    });
+    }, function(err, doc) {
+        if (err) throw err;
+        if(doc) {
+          res.render('pages/blog', {
+            username: user,
+            postid: pid,
+            title: doc.title,
+            body: doc.body,
+            created: doc.created,
+            modified: doc.modified
+           });
+        }
   });
 
-/*
-  res.render('pages/blog', {
-    username: user,
-    postid: pid,
-    title: title,
-    body: body,
-    created: created,
-    modified: modified
-   });
-*/
 });
 
 module.exports = router;
