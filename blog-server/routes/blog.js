@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
+var commonmark = require('commonmark');
+
+
 
 
 /* GET home page. */
@@ -9,6 +12,9 @@ router.get('/:username', function(req, res, next) {
 });
 
 router.get('/:username/:postid', function(req, res, next) {
+
+  var reader = new commonmark.Parser();
+  var writer = new commonmark.HtmlRenderer();
 
   var user = req.params.username;
   var pid = parseInt(req.params.postid);
@@ -22,11 +28,15 @@ router.get('/:username/:postid', function(req, res, next) {
     }, function(err, doc) {
         if (err) throw err;
         if(doc) {
+          var parsed = reader.parse(doc.title);
+          var resultTitle = writer.render(parsed);
+          var parsed = reader.parse(doc.body);
+          var resultBody = writer.render(parsed);
           res.render('pages/blog', {
             username: user,
             postid: pid,
-            title: doc.title,
-            body: doc.body,
+            title: resultTitle,
+            body: resultBody,
             created: doc.created,
             modified: doc.modified
            });
