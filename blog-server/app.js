@@ -5,8 +5,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+//routing area
 var index = require('./routes/index');
 var users = require('./routes/users');
+var blog = require('./routes/blog');
+
+
 
 var app = express();
 
@@ -23,10 +27,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 */
+
+app.use('/', index);
+
+app.use('/blog', blog);
+
+/*
 app.get('/', function(req, res) {
   res.render('pages/index');
 });
+*/
+//app.use('/blog', blog);
 
+/*
 app.get('/blog', function(req, res) {
   res.render('pages/blog');
 });
@@ -38,7 +51,7 @@ app.get('/blog/:username/:postid', function(req, res) {
 app.get('/blog/:username', function(req, res) {
   res.render('pages/blog');
 });
-
+*/
 /*
 
 app.use('/', index);
