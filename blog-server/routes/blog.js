@@ -3,9 +3,6 @@ var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
 var commonmark = require('commonmark');
 
-
-
-
 /* GET home page. */
 router.get('/:username', function(req, res, next) {
   var reader = new commonmark.Parser();

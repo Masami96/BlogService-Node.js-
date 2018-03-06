@@ -10,6 +10,7 @@ var MongoClient = require('mongodb').MongoClient;
 var index = require('./routes/index');
 var users = require('./routes/users');
 var blog = require('./routes/blog');
+var api = require('./routes/api');
 
 var app = express();
 
@@ -22,6 +23,8 @@ app.set('view engine', 'ejs');
 app.use('/', index);
 
 app.use('/blog', blog);
+
+app.use('/api', api);
 
 MongoClient.connect(MONGODB_URI, function(err, database) {
   db = database;
