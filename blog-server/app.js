@@ -30,6 +30,4 @@ MongoClient.connect(MONGODB_URI, function(err, database) {
   console.log('Listening on port 3000');
 });
 
-console.log('3000 babbbbyyyy');
-
 module.exports = app;
