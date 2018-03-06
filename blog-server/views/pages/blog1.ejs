@@ -1,0 +1,12 @@
+<div>
+  <%-username%>'s Posts
+  <ul>
+    <% for(let i = 0; i < titles.length, i < 5; i++) { %>
+      <li>Title:<%- titles[i] %>
+        Body:<%- bodies[i] %></li>
+    <% } %>
+  </ul>
+  <% if(titles.length > 5) { %>
+    <button routerLink="/blog/<%-username%>">Next</button>
+  <% } %>
+</div>
