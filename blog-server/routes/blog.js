@@ -29,15 +29,27 @@ router.get('/:username/:postid', function(req, res, next) {
       username: user
     },function(findErr, result) {
       if (findErr) throw findErr;
-      console.log(result);
+      //console.log(result);
       title = result.title;
       body = result.body;
       created = result.created;
       modified = result.modified;
       client.close();
+
+      console.log(title);
+
+      res.render('pages/blog', {
+        username: user,
+        postid: pid,
+        title: title,
+        body: body,
+        created: created,
+        modified: modified
+       });
     });
   });
 
+/*
   res.render('pages/blog', {
     username: user,
     postid: pid,
@@ -46,7 +58,7 @@ router.get('/:username/:postid', function(req, res, next) {
     created: created,
     modified: modified
    });
-
+*/
 });
 
 module.exports = router;
