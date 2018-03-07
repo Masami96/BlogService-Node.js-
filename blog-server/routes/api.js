@@ -4,9 +4,9 @@ var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
 
 /* GET home page. */
-router.get('/:username', function(req, res, next) {
+router.get('/', function(req, res, next) {
 
-  var user = req.params.username;
+  var user = req.app.get('user');
 
   var mydb = req.app.get('db');
   var blogdb = mydb.db('BlogServer');
@@ -18,9 +18,9 @@ router.get('/:username', function(req, res, next) {
 
 });
 
-router.get('/:username/:postid', function(req, res, next) {
+router.get('/:postid', function(req, res, next) {
 
-  var user = req.params.username;
+  var user = req.app.get('user');
   var pid = parseInt(req.params.postid);
 
   var mydb = req.app.get('db');
@@ -39,8 +39,8 @@ router.get('/:username/:postid', function(req, res, next) {
 router.use(bodyParser.json());
 
 // POST page
-router.post('/:username/:postid', function(req, res, next) {
-  var user = req.params.username;
+router.post('/:postid', function(req, res, next) {
+  var user = req.app.get('user');
   var pid = parseInt(req.params.postid);
   //check for valid title and body being passed via JSON
   if (req.body.title == null || req.body.body == null)
@@ -70,8 +70,8 @@ router.post('/:username/:postid', function(req, res, next) {
 });
 
 // PUT page
-router.put('/:username/:postid', function(req, res, next) {
-  var user = req.params.username;
+router.put('/:postid', function(req, res, next) {
+  var user = req.app.get('user');
   var pid = parseInt(req.params.postid);
   //check for valid title and body being passed via JSON
   if (req.body.title == null || req.body.body == null)
@@ -94,8 +94,8 @@ router.put('/:username/:postid', function(req, res, next) {
 });
 
 // DELETE page
-router.delete('/:username/:postid', function(req, res, next) {
-  var user = req.params.username;
+router.delete('/:postid', function(req, res, next) {
+  var user = req.app.get('user');
   var pid = parseInt(req.params.postid);
 
   var mydb = req.app.get('db');
