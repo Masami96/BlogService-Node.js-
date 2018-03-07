@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { catchError, map, tap } from 'rxjs/operators';
 
 export class Post {
   postid: number;
@@ -13,14 +15,15 @@ export class Post {
 export class BlogService {
 
   private posts: Post[] = [];
-  configUrl = 'http://localhost:3000/api/cs144'
+  private PostsUrl = 'http://localhost:3000/api/cs144/1'
 
   constructor(private http: HttpClient ) {
     this.fetchPosts();
   }
 
   fetchPosts(): void {
-    console.log(this.http.get(this.configUrl));
+    console.log(this.http.get<Post[]>(this.PostsUrl));
+
     /*
     if (typeof(Storage) !== "undefined") {
       if(localStorage.getItem("posts") != null){
