@@ -11,7 +11,9 @@ var cookieParser = require('cookie-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var blog = require('./routes/blog');
+
 var login = require('./routes/login');
+var api = require('./routes/api');
 
 var app = express();
 app.use(cookieParser());
@@ -26,7 +28,10 @@ app.use('/', index);
 
 app.use('/blog', blog);
 
+
 app.use('/login', login);
+
+app.use('/api', api);
 
 MongoClient.connect(MONGODB_URI, function(err, database) {
   db = database;
@@ -34,7 +39,5 @@ MongoClient.connect(MONGODB_URI, function(err, database) {
   app.listen(3000);
   console.log('Listening on port 3000');
 });
-
-console.log('3000 babbbbyyyy');
 
 module.exports = app;
