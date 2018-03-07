@@ -8,10 +8,7 @@ var MongoClient = require('mongodb').MongoClient;
 var cookieParser = require('cookie-parser');
 
 //routing area
-var index = require('./routes/index');
-var users = require('./routes/users');
 var blog = require('./routes/blog');
-
 var login = require('./routes/login');
 var api = require('./routes/api');
 
@@ -24,10 +21,7 @@ const MONGODB_URI = 'mongodb://localhost:27017';
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use('/', index);
-
 app.use('/blog', blog);
-
 
 app.use('/login', login);
 

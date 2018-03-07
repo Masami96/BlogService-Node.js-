@@ -13,14 +13,21 @@ export class Post {
 export class BlogService {
 
   private posts: Post[] = [];
-  configUrl = 'http://localhost:3000/api/cs144'
+  configUrl = 'http://localhost:3000/api/cs144/1'
 
   constructor(private http: HttpClient ) {
     this.fetchPosts();
   }
 
+  getConfig(): Observable<Post> {
+    return this.http.get<Post>(this.configUrl);
+  }
+
   fetchPosts(): void {
+    var test_string = this.getConfig;
     console.log(this.http.get(this.configUrl));
+    console.log("fetchposts");
+    console.log(test_string);
     /*
     if (typeof(Storage) !== "undefined") {
       if(localStorage.getItem("posts") != null){
